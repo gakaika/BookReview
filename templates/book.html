@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+
+<h1 id="top_title">{{book_title}}</h1>
+<h2 class="text-primary">{{book_author}}</h2>
+<h2 class="text-info">{{book_year}}</h2>
+<h4 class="text-secondary spaced">ISBN: {{book_isbn}}</h4>
+<h4 class="text-muted">Rating: {{rating}}</h4>
+
+
+
+
+<div>
+    {% for i in range(star_rating) %}
+        <span class="fa fa-star fa-2x checked"></span>
+    {% endfor %}
+
+    {% for i in range(5-star_rating) %}
+        <span class="fa fa-star fa-2x"></span>
+    {% endfor %}
+</div>
+
+{% if review_items != 0 %}
+<h3 id="reviews_header"><u>Reviews:</u></h3>
+
+<div class="container">
+    {% for i in range(review_items) %}
+
+    <div class="row">
+      <div class="col-5 review_border" id="review">
+        <h5>{{reviews[i].review}}</h5>
+        <h6 class="text-secondary right">-{{reviews[i].username}}</h6>
+        <h6 class="text-secondary right">{{reviews[i].time}}</h6>
+      </div>
+    </div>
+
+    {% endfor %}
+</div>
+
+{% else %}
+<div class="row">
+    <div class="col-5" id="no_review">
+        <h5 class="text-muted">No Reviews To Display</h5>
+    </div>
+</div>
+{% endif %}
+
+<h3 id="new_review_header"><u>Enter Your Review:</u></h3>
+
+<form method="post">
+    <div class="form-group">
+        <textarea class="form-control" id="input_review" rows="5" cols="60" name="review_new"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary" id="review_submit">Submit</button>
+</form>
+
+
+
+{% endblock %}
